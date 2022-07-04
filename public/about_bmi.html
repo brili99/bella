@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bella Dashboard Monitor</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        body {
+            background-image: url('img/bg1.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img
+                    src="https://firebase.google.com/downloads/brand-guidelines/PNG/logo-standard.png?hl=id" alt=""
+                    height="30"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-center w-100">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="about_bmi.html">About BMI</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">Dashboard Monitor</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="grafis.html">Grafik</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button type="button" class="btn btn-warning" onclick="profil()">Profil</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container text-center mt-3">
+        <div class="card" style="background-color: rgba(255, 255, 255, 0.4);">
+            <div class="card-body">
+                <p>Body Mass Index (BMI) atau indeks massa tubuh merupakan nilai yang didapatkan dari hasil pembagian
+                    pengukuran berat badan (kg) dengan pengukuran tinggi badan yang dikuadratkan (meter). BMI tidak
+                    termasuk ke dalam suatu besaran, oleh sebabnya BMI tidak memiliki satuan. BMI adalah suatu parameter
+                    yang digunakan untuk mengetahui kadar lemak relatif pada tubuh orang dewasa yang berumur lebih dari
+                    20 tahun. BMI memiliki fungsi untuk menentukan status berat badan seseorang, dimana status berat
+                    badan ini digolongkan menjadi beberapa kelas, diantaranya adalah sangat kurus, ideal, atau sangat
+                    gemuk. BMI juga dapat dimanfatkan untuk memperoleh informasi terkait status berat badan seseorang
+                    yang berhubungan dengan resiko kesehatan akibat kekurangan atau kelebihan berat badan.</p>
+
+                <div class="d-flex justify-content-center">
+                    <table class="table table-sm table-light" style="width: fit-content;">
+                        <thead>
+                            <tr>
+                                <th>Nilai BMI</th>
+                                <th>Kategori</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <17,0 </td>
+                                <td>Sangat Kurus</td>
+                            </tr>
+                            <tr>
+                                <td>17,0 -18,5</td>
+                                <td>Kurus</td>
+                            </tr>
+                            <tr>
+                                <td>18,6 -25,0</td>
+                                <td>Ideal</td>
+                            </tr>
+                            <tr>
+                                <td>25,1 -27,0</td>
+                                <td>Gemuk</td>
+                            </tr>
+                            <tr>
+                                <td>>27,0</td>
+                                <td>Sangat Gemuk (Obesitas)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function profil() {
+            Swal.fire({
+                title: 'Profil',
+                html: 'Arika Anggi Cahyani<br>20/460862/SV/17943<br>Teknologi Rekayasa Instrumentasi dan Kontrol<br>Sekolah Vokasi<br>arikacahyani12@gmail.com',
+                imageUrl: 'img/profil.jpeg',
+                imageWidth: 330,
+                imageHeight: 467,
+                imageAlt: 'Custom image',
+            })
+        }
+    </script>
+</body>
+
+</html>

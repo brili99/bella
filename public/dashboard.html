@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bella Dashboard Monitor</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.bootstrap5.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.colVis.min.js"></script>
+
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/9.6.7/firebase-app-compat.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/9.6.7/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/9.6.7/firebase-database-compat.js"></script>
+    <script defer src="/__/firebase/9.6.7/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/9.6.7/firebase-functions-compat.js"></script>
+    <script defer src="/__/firebase/9.6.7/firebase-messaging-compat.js"></script>
+    <script defer src="/__/firebase/9.6.7/firebase-storage-compat.js"></script>
+    <script defer src="/__/firebase/9.6.7/firebase-analytics-compat.js"></script>
+    <script defer src="/__/firebase/9.6.7/firebase-remote-config-compat.js"></script>
+    <script defer src="/__/firebase/9.6.7/firebase-performance-compat.js"></script>
+    <!-- 
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+    <style>
+        body {
+            background-image: url('img/bg1.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img
+                    src="https://firebase.google.com/downloads/brand-guidelines/PNG/logo-standard.png?hl=id" alt=""
+                    height="30"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-center w-100">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="about_bmi.html">About BMI</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link active" href="dashboard.html">Dashboard Monitor</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="grafis.html">Grafik</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <!-- <button type="button" class="btn btn-warning" onclick="profil()">Profil</button> -->
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row mt-1 mb-2">
+            <div class="col-md-6 mb-2">
+                <div class="card w-100">
+                    <div class="card-header">Status</div>
+                    <div class="card-body">
+                        <table class="table w-100">
+                            <tr>
+                                <th>Amonia</th>
+                                <th id="amonia"></th>
+                            </tr>
+                            <tr>
+                                <th>DO</th>
+                                <th id="do"></th>
+                            </tr>
+                            <tr>
+                                <th>pH</th>
+                                <th id="ph"></th>
+                            </tr>
+                            <tr>
+                                <th>Suhu</th>
+                                <th id="suhu"></th>
+                            </tr>
+                            <tr>
+                                <th>TDS</th>
+                                <th id="tds"></th>
+                            </tr>
+                            <tr>
+                                <th>Updated</th>
+                                <th id="updated"></th>
+                            </tr>
+                        </table>
+                        <div>
+                            <ul>
+                                <li>Do</li>
+                                <p>Oksigen terlarut yang dapat menyatakan kandungan oksigen yang terlarut didalam air
+                                </p>
+                                <li>TDS</li>
+                                <p>Total padatan terlarut digunakan untuk menyatakan jumlah total zat anorganik dan
+                                    organic terlarut didalam air</p>
+                                <li>Suhu</li>
+                                <p>Digunakan untuk menentukan besarnya spesies biologi dan tingkat aktivitasnya</p>
+                                <li>pH</li>
+                                <p>Digunakan menunjukkan proses reaksi yang berada dalam perairan seperti reaksi dalam
+                                    kondisi asam atau basa</p>
+                                <li>Amoniak</li>
+                                <p>Senyawa kima (NH3), berupa gas dengan bau tajam yang khas</p>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2">Parameter</th>
+                                    <th colspan="2">Konsentrasi Paling Tinggi</th>
+                                </tr>
+                                <tr>
+                                    <th>Nilai</th>
+                                    <th>Satuan</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th colspan="3">Fisika</th>
+                                </tr>
+                                <tr>
+                                    <td>Suhu</td>
+                                    <td>38</td>
+                                    <td>℃</td>
+                                </tr>
+                                <tr>
+                                    <td>Zat Padat Terlarut</td>
+                                    <td>2000</td>
+                                    <td>mg/L</td>
+                                </tr>
+                                <tr>
+                                    <td>Zat Padat Tersuspensi</td>
+                                    <td>200</td>
+                                    <td>mg/L</td>
+                                </tr>
+                                <tr>
+                                    <th colspan="3">Kimia</th>
+                                </tr>
+                                <tr>
+                                    <td>pH</td>
+                                    <td>6 sampai 9</td>
+                                    <td>mg/L</td>
+                                </tr>
+                                <tr>
+                                    <td>BOD</td>
+                                    <td>50</td>
+                                    <td>mg/L</td>
+                                </tr>
+                                <tr>
+                                    <td>COD</td>
+                                    <td>80</td>
+                                    <td>mg/L</td>
+                                </tr>
+                                <tr>
+                                    <td>TSS</td>
+                                    <td>30</td>
+                                    <td>mg/L</td>
+                                </tr>
+                                <tr>
+                                    <td>Minyak dan Lemak</td>
+                                    <td>10</td>
+                                    <td>mg/L</td>
+                                </tr>
+                                <tr>
+                                    <td>MBAS</td>
+                                    <td>10</td>
+                                    <td>mg/L</td>
+                                </tr>
+                                <tr>
+                                    <td>Amonia Nitrogen</td>
+                                    <td>10</td>
+                                    <td>mg/L</td>
+                                </tr>
+                                <tr>
+                                    <td>Total Coliform</td>
+                                    <td>5000</td>
+                                    <td>(MPN/100 ml)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">Logger</div>
+                    <div class="card-body">
+                        <table class="table w-100" id="log_table">
+                            <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Amonia</th>
+                                    <th>DO</th>
+                                    <th>pH</th>
+                                    <th>Suhu</th>
+                                    <th>TDS</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function profil() {
+            Swal.fire({
+                title: 'Profil',
+                html: 'Mira Ulyatus Salsabela<br>20/460872/SV/17953<br>Teknologi Rekayasa Instrumentasi dan Kontrol<br>Sekolah Vokasi<br>arikacahyani12@gmail.com',
+                imageUrl: 'img/profil.jpeg',
+                imageWidth: 330,
+                imageHeight: 467,
+                imageAlt: 'Custom image',
+            })
+        }
+
+        var insert_log = 1;
+        $(document).ready(function () {
+            var table = $('#log_table').DataTable({
+                lengthChange: false,
+                buttons: ['copy', 'excel', 'pdf', 'colvis']
+            });
+
+            table.buttons().container()
+                .appendTo('#log_table_wrapper .col-md-6:eq(0)');
+
+            const loadEl = document.querySelector('#load');
+            // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+            // // The Firebase SDK is initialized and available here!
+            //
+            // firebase.auth().onAuthStateChanged(user => { });
+            // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
+
+            const fb = firebase.database();
+            fb.ref('/status').on('value', snapshot => {
+                // console.log(snapshot.val());
+                $('#amonia').html(snapshot.val().amonia);
+                $('#do').html(snapshot.val().do);
+                $('#ph').html(snapshot.val().ph);
+                $('#suhu').html(snapshot.val().suhu);
+                $('#tds').html(snapshot.val().tds);
+                $('#updated').html(snapshot.val().updated);
+                if (insert_log == 0) {
+                    table.row.add([
+                        snapshot.val().updated,
+                        snapshot.val().amonia,
+                        snapshot.val().do,
+                        snapshot.val().ph,
+                        snapshot.val().suhu,
+                        snapshot.val().tds
+                    ]).draw(false);
+                }
+            });
+            fb.ref('/log').once('value', snapshot => {
+                if (insert_log == 1) {
+                    var log = snapshot.val();
+                    // console.log(log);
+                    $.each(log, function (key, value) {
+                        if (
+                            value.updated != null &&
+                            value.amonia != null &&
+                            value.do != null &&
+                            value.ph != null &&
+                            value.suhu != null &&
+                            value.tds != null
+                        ) {
+                            table.row.add([
+                                value.updated,
+                                value.amonia,
+                                value.do,
+                                value.ph,
+                                value.suhu,
+                                value.tds
+                            ]).draw(false);
+                        }
+                    });
+                    insert_log = 0;
+                }
+            });
+
+            // firebase.firestore().doc('/foo/bar').get().then(() => { });
+            // firebase.functions().httpsCallable('yourFunction')().then(() => { });
+            // firebase.messaging().requestPermission().then(() => { });
+            // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+            // firebase.analytics(); // call to activate
+            // firebase.analytics().logEvent('tutorial_completed');
+            // firebase.performance(); // call to activate
+            //
+            // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+
+
+            try {
+                let app = firebase.app();
+                let features = [
+                    'auth',
+                    'database',
+                    'firestore',
+                    'functions',
+                    'messaging',
+                    'storage',
+                    'analytics',
+                    'remoteConfig',
+                    'performance',
+                ].filter(feature => typeof app[feature] === 'function');
+                // loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
+            } catch (e) {
+                console.error(e);
+                // loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+            }
+        });
+    </script>
+</body>
+
+</html>

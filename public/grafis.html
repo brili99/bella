@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bella Dashboard Monitor</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.bootstrap5.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
+        integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.colVis.min.js"></script>
+
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/9.6.7/firebase-app-compat.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/9.6.7/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/9.6.7/firebase-database-compat.js"></script>
+    <script defer src="/__/firebase/9.6.7/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/9.6.7/firebase-functions-compat.js"></script>
+    <script defer src="/__/firebase/9.6.7/firebase-messaging-compat.js"></script>
+    <script defer src="/__/firebase/9.6.7/firebase-storage-compat.js"></script>
+    <script defer src="/__/firebase/9.6.7/firebase-analytics-compat.js"></script>
+    <script defer src="/__/firebase/9.6.7/firebase-remote-config-compat.js"></script>
+    <script defer src="/__/firebase/9.6.7/firebase-performance-compat.js"></script>
+    <!-- 
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+    <style>
+        body {
+            background-image: url('img/bg1.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img
+                    src="https://firebase.google.com/downloads/brand-guidelines/PNG/logo-standard.png?hl=id" alt=""
+                    height="30"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-center w-100">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="about_bmi.html">About BMI</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">Dashboard Monitor</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="grafis.html">Grafik</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <!-- <button type="button" class="btn btn-warning" onclick="profil()">Profil</button> -->
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mt-1 mb-2">
+                    <div class="card-header">Amonia</div>
+                    <div class="card-body">
+                        <canvas id="chartAmonia" class="w-100"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mt-1 mb-2">
+                    <div class="card-header">DO</div>
+                    <div class="card-body">
+                        <canvas id="chartDo" class="w-100"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mt-1 mb-2">
+                    <div class="card-header">pH</div>
+                    <div class="card-body">
+                        <canvas id="chartPh" class="w-100"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mt-1 mb-2">
+                    <div class="card-header">Suhu</div>
+                    <div class="card-body">
+                        <canvas id="chartSuhu" class="w-100"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mt-1 mb-2">
+                    <div class="card-header">TDS</div>
+                    <div class="card-body">
+                        <canvas id="chartTds" class="w-100"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var chartAmonia = new Chart(
+            document.getElementById('chartAmonia'),
+            {
+                type: 'bar',
+                data: {
+                    labels: ['',],
+                    datasets: [{
+                        label: 'Amonia',
+                        backgroundColor: 'rgb(30,129,176)',
+                        borderColor: 'rgb(30,129,176)',
+                        data: [0],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Waktu',
+                                // color: '#911',
+                            }
+                        },
+                        y: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Amonia',
+                                // color: '#191',
+                            }
+                        }
+                    }
+                }
+            }
+        );
+        var chartDo = new Chart(
+            document.getElementById('chartDo'),
+            {
+                type: 'bar',
+                data: {
+                    labels: ['',],
+                    datasets: [{
+                        label: 'Do',
+                        backgroundColor: 'rgb(226,135,67)',
+                        borderColor: 'rgb(226,135,67)',
+                        data: [0],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Waktu',
+                                // color: '#911',
+                            }
+                        },
+                        y: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Do',
+                                // color: '#191',
+                            }
+                        }
+                    }
+                }
+            }
+        );
+        var chartPh = new Chart(
+            document.getElementById('chartPh'),
+            {
+                type: 'bar',
+                data: {
+                    labels: ['',],
+                    datasets: [{
+                        label: 'pH',
+                        backgroundColor: 'rgb(135,62,35)',
+                        borderColor: 'rgb(135,62,35)',
+                        data: [0],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Waktu',
+                                // color: '#911',
+                            }
+                        },
+                        y: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'pH',
+                                // color: '#191',
+                            }
+                        }
+                    }
+                }
+            }
+        );
+        var chartSuhu = new Chart(
+            document.getElementById('chartSuhu'),
+            {
+                type: 'bar',
+                data: {
+                    labels: ['',],
+                    datasets: [{
+                        label: 'Suhu',
+                        backgroundColor: 'rgb(235, 52, 52)',
+                        borderColor: 'rgb(235, 52, 52)',
+                        data: [0],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Waktu',
+                                // color: '#911',
+                            }
+                        },
+                        y: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Suhu',
+                                // color: '#191',
+                            }
+                        }
+                    }
+                }
+            }
+        );
+        var chartTds = new Chart(
+            document.getElementById('chartTds'),
+            {
+                type: 'bar',
+                data: {
+                    labels: ['',],
+                    datasets: [{
+                        label: 'TDS',
+                        backgroundColor: 'rgb(5, 247, 130)',
+                        borderColor: 'rgb(5, 247, 130)',
+                        data: [0],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Waktu',
+                                // color: '#911',
+                            }
+                        },
+                        y: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'TDS',
+                                // color: '#191',
+                            }
+                        }
+                    }
+                }
+            }
+        );
+
+        function profil() {
+            Swal.fire({
+                title: 'Profil',
+                html: 'Mira Ulyatus Salsabela<br>20/460872/SV/17953<br>Teknologi Rekayasa Instrumentasi dan Kontrol<br>Sekolah Vokasi<br>arikacahyani12@gmail.com',
+                imageUrl: 'img/profil.jpeg',
+                imageWidth: 330,
+                imageHeight: 467,
+                imageAlt: 'Custom image',
+            })
+        }
+        var insert_log = 1;
+        $(document).ready(function () {
+            // var table = $('#log_table').DataTable({
+            //     lengthChange: false,
+            //     buttons: ['copy', 'excel', 'pdf', 'colvis']
+            // });
+
+            // table.buttons().container()
+            //     .appendTo('#log_table_wrapper .col-md-6:eq(0)');
+
+            const loadEl = document.querySelector('#load');
+            // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+            // // The Firebase SDK is initialized and available here!
+            //
+            // firebase.auth().onAuthStateChanged(user => { });
+
+            const fb = firebase.database();
+            fb.ref('/log').once('value', snapshot => {
+                var log = snapshot.val();
+                var tenItemAmonia = [];
+                var tenItemDo = [];
+                var tenItemPh = [];
+                var tenItemSuhu = [];
+                var tenItemTds = [];
+                var tenItemUpdated = [];
+                // console.log(log);
+
+                $.each(log, function (key, value) {
+                    // console.log(value);
+                    if (
+                        value.updated != null &&
+                        value.amonia != null &&
+                        value.do != null &&
+                        value.ph != null &&
+                        value.suhu != null &&
+                        value.tds != null
+                    ) {
+                        tenItemAmonia.push(value.amonia);
+                        tenItemDo.push(value.do);
+                        tenItemPh.push(value.ph);
+                        tenItemSuhu.push(value.suhu);
+                        tenItemTds.push(value.tds);
+                        tenItemUpdated.push(value.updated);
+
+                        if (tenItemAmonia.length > 10) {
+                            tenItemAmonia.shift();
+                        }
+                        if (tenItemDo.length > 10) {
+                            tenItemDo.shift();
+                        }
+                        if (tenItemPh.length > 10) {
+                            tenItemPh.shift();
+                        }
+                        if (tenItemSuhu.length > 10) {
+                            tenItemSuhu.shift();
+                        }
+                        if (tenItemTds.length > 10) {
+                            tenItemTds.shift();
+                        }
+                        if (tenItemUpdated.length > 10) {
+                            tenItemUpdated.shift();
+                        }
+                    }
+                });
+                chartAmonia.data.labels = tenItemUpdated;
+                chartDo.data.labels = tenItemUpdated;
+                chartPh.data.labels = tenItemUpdated;
+                chartSuhu.data.labels = tenItemUpdated;
+                chartTds.data.labels = tenItemUpdated;
+
+                chartAmonia.data.datasets[0].data = tenItemAmonia;
+                chartDo.data.datasets[0].data = tenItemDo;
+                chartPh.data.datasets[0].data = tenItemPh;
+                chartSuhu.data.datasets[0].data = tenItemSuhu;
+                chartTds.data.datasets[0].data = tenItemTds;
+
+                // console.log(tenItemAmonia);
+
+                chartAmonia.update();
+                chartDo.update();
+                chartPh.update();
+                chartSuhu.update();
+                chartTds.update();
+            });
+            fb.ref('/status').on('value', snapshot => {
+                chartAmonia.data.labels.push(snapshot.val().updated);
+                chartDo.data.labels.push(snapshot.val().updated);
+                chartPh.data.labels.push(snapshot.val().updated);
+                chartSuhu.data.labels.push(snapshot.val().updated);
+                chartTds.data.labels.push(snapshot.val().updated);
+
+                chartAmonia.data.datasets[0].data.push(snapshot.val().amonia);
+                chartDo.data.datasets[0].data.push(snapshot.val().do);
+                chartPh.data.datasets[0].data.push(snapshot.val().ph);
+                chartSuhu.data.datasets[0].data.push(snapshot.val().suhu);
+                chartTds.data.datasets[0].data.push(snapshot.val().tds);
+
+                if (chartAmonia.data.labels.length > 10) {
+                    chartAmonia.data.labels.shift();
+                }
+                if (chartDo.data.labels.length > 10) {
+                    chartDo.data.labels.shift();
+                }
+                if (chartPh.data.labels.length > 10) {
+                    chartPh.data.labels.shift();
+                }
+                if (chartSuhu.data.labels.length > 10) {
+                    chartSuhu.data.labels.shift();
+                }
+                if (chartTds.data.labels.length > 10) {
+                    chartTds.data.labels.shift();
+                }
+
+                if (chartAmonia.data.datasets[0].data.length > 10) {
+                    chartAmonia.data.datasets[0].data.shift();
+                }
+                if (chartDo.data.datasets[0].data.length > 10) {
+                    chartDo.data.datasets[0].data.shift();
+                }
+                if (chartPh.data.datasets[0].data.length > 10) {
+                    chartPh.data.datasets[0].data.shift();
+                }
+                if (chartSuhu.data.datasets[0].data.length > 10) {
+                    chartSuhu.data.datasets[0].data.shift();
+                }
+                if (chartTds.data.datasets[0].data.length > 10) {
+                    chartTds.data.datasets[0].data.shift();
+                }
+
+                chartAmonia.update();
+                chartDo.update();
+                chartPh.update();
+                chartSuhu.update();
+                chartTds.update();
+            });
+            // firebase.database().ref('/tinggi').on('value', snapshot => {
+            //   $('#berat').html(snapshot.val());
+            // });
+            // firebase.firestore().doc('/foo/bar').get().then(() => { });
+            // firebase.functions().httpsCallable('yourFunction')().then(() => { });
+            // firebase.messaging().requestPermission().then(() => { });
+            // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+            // firebase.analytics(); // call to activate
+            // firebase.analytics().logEvent('tutorial_completed');
+            // firebase.performance(); // call to activate
+            //
+            // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+            try {
+                let app = firebase.app();
+                let features = [
+                    'auth',
+                    'database',
+                    'firestore',
+                    'functions',
+                    'messaging',
+                    'storage',
+                    'analytics',
+                    'remoteConfig',
+                    'performance',
+                ].filter(feature => typeof app[feature] === 'function');
+                // loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
+            } catch (e) {
+                console.error(e);
+                // loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+            }
+        });
+    </script>
+
+</body>
+
+</html>
